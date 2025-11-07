@@ -65,9 +65,10 @@ O foco analítico será nos municípios de **Campinas**, **Americana** e **Valin
 
 
 ## 5. Modelo de Dados
-- Modelo Relacional Simplificado
-Tabela	Descrição	Campos Principais
-dim_municipio	Informações de cada município	id_municipio, nome, regiao_saude, populacao
-dim_hospital	Cadastro dos hospitais/unidades	id_hospital, nome, cnes, municipio_id, esfera_administrativa
-dim_tipo_leito	Tipos de leitos cadastrados	id_tipo, descricao, tipo_uti, is_sus
-fato_ocupacao	Dados diários de leitos ocupados/disponíveis	data, hospital_id, tipo_leito_id, leitos_existentes, leitos_ocupados, taxa_ocupacao
+| Tabela             | Descrição                                    | Campos Principais                                                                               |
+| ------------------ | -------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| **dim_municipio**  | Informações de cada município                | `id_municipio`, `nome`, `regiao_saude`, `populacao`                                             |
+| **dim_hospital**   | Cadastro dos hospitais/unidades              | `id_hospital`, `nome`, `cnes`, `municipio_id`, `esfera_administrativa`                          |
+| **dim_tipo_leito** | Tipos de leitos cadastrados                  | `id_tipo`, `descricao`, `tipo_uti`, `is_sus`                                                    |
+| **fato_ocupacao**  | Dados diários de leitos ocupados/disponíveis | `data`, `hospital_id`, `tipo_leito_id`, `leitos_existentes`, `leitos_ocupados`, `taxa_ocupacao` |
+
