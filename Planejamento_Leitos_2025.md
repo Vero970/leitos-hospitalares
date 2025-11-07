@@ -55,26 +55,13 @@ O foco analítico será nos municípios de **Campinas**, **Americana** e **Valin
 | RF06 | Permitir previsão simples de demanda (curto prazo) via modelos estatísticos. |
 ---
 
+
 ## 4. Diagrama de Arquitetura do Sistema
 
-```mermaid
-flowchart LR
-    A[Usuário / Gestor Público] -->|Acessa dashboards| G[Power BI Service]
-    
-    subgraph Azure Cloud
-        B[Azure Blob Storage] --> C[Azure Data Factory]
-        C --> D[Azure Synapse Analytics / SQL Database]
-        D --> G
-        D --> E[Azure Machine Learning]
-        E --> G
-    end
+![Diagrama de Arquitetura do Sistema](diagrama_arquitetura.png)
 
-    subgraph Fontes de Dados
-        F[Dataset Leitos_2025.csv (OpenDataSUS)]
-    end
+*Fluxo do sistema: o dataset é coletado do OpenDataSUS, processado e armazenado na nuvem Azure, e visualizado no Power BI pelos gestores públicos.*
 
-    F -->|Upload ou integração| B
----
 
 
 ## 5. Modelo de Dados
