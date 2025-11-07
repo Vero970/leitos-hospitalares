@@ -1,4 +1,4 @@
-# 📘 Planejamento - Sistema de Monitoramento e Apoio à Decisão (Leitos 2025)
+# 📘 Planejamento - Sistema de Monitoramento Leitos Hospitalares (Leitos 2025)
 
 ## 1. Definição do Problema
 
@@ -7,7 +7,7 @@ Há uma necessidade de consolidar informações de diferentes hospitais e regiõ
 
 O problema central é a **ausência de um sistema integrado de monitoramento e apoio à decisão** que permita visualizar, prever e agir de forma eficiente sobre a disponibilidade de leitos hospitalares.
 
-### Objetivo do Projeto
+### 🎯 Objetivo do Projeto
 
 Desenvolver um **sistema simples de análise e visualização de dados** que possibilite:
 
@@ -21,13 +21,14 @@ O foco analítico será nos municípios de **Campinas**, **Americana** e **Valin
 ---
 
 ## 2. Descrição do Dataset
-**Fonte:** OPENDATASUS 2025 
-Arquivo: Leitos_2025.csv  
-**
-**Formato:** CSV (separador `;`)  
-**Tamanho:** Aproximadamente 65 mil registros.
 
-### Campos principais (exemplo)
+**Fonte:** [OpenDataSUS – 2025](https://opendatasus.saude.gov.br/dataset/hospitais-e-leitos)  
+**Arquivo:** `Leitos_2025.csv`  
+**Formato:** CSV (separador `;`)  
+**Tamanho:** Aproximadamente 65 mil registros  
+
+### Campos principais
+
 | Campo | Descrição |
 |-------|------------|
 | `MUNICIPIO` | Nome do município |
@@ -39,6 +40,7 @@ Arquivo: Leitos_2025.csv
 | `UTI_NEONATAL_EXIST` | Leitos de UTI neonatal existentes |
 | `DATA_ATUALIZACAO` | Data de atualização do registro |
 
+---
 
 ## 3. Requisitos
 
@@ -51,38 +53,30 @@ Arquivo: Leitos_2025.csv
 | RF04 | Disponibilizar relatórios e dashboards interativos no Power BI. |
 | RF05 | Implementar alertas automáticos quando a taxa de ocupação ultrapassar 90%. |
 | RF06 | Permitir previsão simples de demanda (curto prazo) via modelos estatísticos. |
-
-
-
 ---
-## 4. Diagrama de Arquitetura
+
+## 4. Diagrama de Arquitetura do Sistema
 
 ```mermaid
 flowchart LR
-  subgraph Usuario
-    A[Gestor Público / Analista]
-  end
+    A[Usuário / Gestor Público] -->|Acessa dashboards| G[Power BI Service]
+    
+    subgraph Azure Cloud
+        B[Azure Blob Storage] --> C[Azure Data Factory]
+        C --> D[Azure Synapse Analytics / SQL Database]
+        D --> G
+        D --> E[Azure Machine Learning]
+        E --> G
+    end
 
-  subgraph Visualizacao
-    B[Power BI / Dashboard]
-  end
+    subgraph Fontes de Dados
+        F[Dataset Leitos_2025.csv (OpenDataSUS)]
+    end
 
-  subgraph Armazenamento
-    F[Azure Blob Storage<br>Leitos_2025.csv (dados brutos)]
-    C[Azure Data Lake<br>Camada de dados consolidados]
-  end
+    F -->|Upload ou integração| B
+---
 
-  subgraph Processamento
-    E[Azure Data Factory<br>Orquestração ETL]
-    D[Azure Databricks / Synapse<br>Limpeza e Processamento]
-  end
 
-  A --> B
-  B --> C
-  C --> D
-  D --> E
-  E --> F
-  E --> C
 ## 5. Modelo de Dados
 - Modelo Relacional Simplificado
 Tabela	Descrição	Campos Principais
