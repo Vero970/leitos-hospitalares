@@ -83,17 +83,8 @@ flowchart LR
   D --> E
   E --> F
   E --> C
-5. Modelo de Dados
-O modelo de dados segue a estrutura Data Lake + Camadas de Transformação, com ênfase em organização e rastreabilidade.
-Abaixo está a proposta conceitual:
-
-5.1 Camadas do Data Lake
-Camada	Nome	Descrição
-Raw	leitos_raw	Armazena o arquivo CSV original (Leitos_2025.csv).
-Staging (Stg)	leitos_stg	Dados limpos e padronizados (tipos corrigidos, nulos tratados).
-Curated / Gold	leitos_curated	Dados agregados e enriquecidos para análise (por município, tipo de leito, taxa de ocupação).
-
-5.2 Modelo Relacional Simplificado
+## 5. Modelo de Dados
+- Modelo Relacional Simplificado
 Tabela	Descrição	Campos Principais
 dim_municipio	Informações de cada município	id_municipio, nome, regiao_saude, populacao
 dim_hospital	Cadastro dos hospitais/unidades	id_hospital, nome, cnes, municipio_id, esfera_administrativa
