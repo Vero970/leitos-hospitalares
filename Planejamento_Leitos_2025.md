@@ -2,8 +2,7 @@
 
 ## 1. Definição do Problema
 
-A gestão de leitos hospitalares é um desafio recorrente para a administração pública, especialmente em situações de alta demanda e emergências sanitárias.  
-Há uma necessidade de consolidar informações de diferentes hospitais e regiões para **acompanhar a ocupação, identificar déficits e otimizar recursos**.
+A gestão de leitos hospitalares é um desafio recorrente para a administração pública,há uma necessidade de consolidar informações de diferentes hospitais e regiões para **acompanhar a ocupação, identificar déficits e otimizar recursos**.
 
 O problema central é a **ausência de um sistema integrado de monitoramento e apoio à decisão** que permita visualizar, prever e agir de forma eficiente sobre a disponibilidade de leitos hospitalares.
 
