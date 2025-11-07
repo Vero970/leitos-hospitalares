@@ -55,13 +55,47 @@ Arquivo: Leitos_2025.csv
 
 
 ---
-
 ## 4. Diagrama de Arquitetura
 
 ```mermaid
 flowchart LR
-  A[Usuário / Gestor Público] --> B[Power BI - Visualização e Alertas]
-  B --> C[Azure Data Lake - Dados Consolidados]
-  C --> D[Azure Databricks / Synapse - Processamento e Limpeza]
-  D --> E[Azure Data Factory - Orquestração ETL]
-  E --> F[Azure Blob Storage - Armazenamento Bruto (CSV Original)]
+  subgraph Usuario
+    A[Gestor Público / Analista]
+  end
+
+  subgraph Visualizacao
+    B[Power BI / Dashboard]
+  end
+
+  subgraph Armazenamento
+    F[Azure Blob Storage<br>Leitos_2025.csv (dados brutos)]
+    C[Azure Data Lake<br>Camada de dados consolidados]
+  end
+
+  subgraph Processamento
+    E[Azure Data Factory<br>Orquestração ETL]
+    D[Azure Databricks / Synapse<br>Limpeza e Processamento]
+  end
+
+  A --> B
+  B --> C
+  C --> D
+  D --> E
+  E --> F
+  E --> C
+5. Modelo de Dados
+O modelo de dados segue a estrutura Data Lake + Camadas de Transformação, com ênfase em organização e rastreabilidade.
+Abaixo está a proposta conceitual:
+
+5.1 Camadas do Data Lake
+Camada	Nome	Descrição
+Raw	leitos_raw	Armazena o arquivo CSV original (Leitos_2025.csv).
+Staging (Stg)	leitos_stg	Dados limpos e padronizados (tipos corrigidos, nulos tratados).
+Curated / Gold	leitos_curated	Dados agregados e enriquecidos para análise (por município, tipo de leito, taxa de ocupação).
+
+5.2 Modelo Relacional Simplificado
+Tabela	Descrição	Campos Principais
+dim_municipio	Informações de cada município	id_municipio, nome, regiao_saude, populacao
+dim_hospital	Cadastro dos hospitais/unidades	id_hospital, nome, cnes, municipio_id, esfera_administrativa
+dim_tipo_leito	Tipos de leitos cadastrados	id_tipo, descricao, tipo_uti, is_sus
+fato_ocupacao	Dados diários de leitos ocupados/disponíveis	data, hospital_id, tipo_leito_id, leitos_existentes, leitos_ocupados, taxa_ocupacao
